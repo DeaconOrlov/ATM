@@ -1,7 +1,9 @@
+import pandas as pd
+df = pd.read_csv('atm/accounts.csv')
+
 # Request Pin from user
 selectedPin = int(input("Enter PIN: "))
-savedPin = 1234
-balance = float(5000)
+
 
 # Add to balance and return new balance
 def make_Deposit():
@@ -23,11 +25,11 @@ def withdraw_Amt():
 
 # Returns current balance
 def check_balance():
-     print("This is your current Balance: {}".format(balance))
+     print("This is your current Balance: {}".format(df.loc[df['pin'] == selectedPin])(0, 'balance'))
 
 # Set Logged in value to 1 now user is logged in
 # Checks pin input against saved pin
-if selectedPin == savedPin:
+if selectedPin in df.values:
     loggedIn = 1
 else:
     loggedIn = 0
