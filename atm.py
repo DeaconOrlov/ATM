@@ -25,7 +25,7 @@ def withdraw_Amt():
 
 # Returns current balance
 def check_balance():
-     print("This is your current Balance: {}".format(df.loc[df['pin'] == selectedPin])(0, 'balance'))
+     
 
 # Set Logged in value to 1 now user is logged in
 # Checks pin input against saved pin
