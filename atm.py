@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 df = pd.read_csv('atm/accounts.csv')
 
 # Request Pin from user
@@ -19,16 +20,16 @@ def make_Deposit():
 
 # Withdraw from balance, checks if balance is greater than zero, returns new balance
 def withdraw_Amt():
-    withdrawAmt = float((input("How much would you like to withdraw? ")))
-    withBal = selectedAcct.at[int(acctIndex), 'balance']
-    withBal -= withdrawAmt
-
+    withdrawAmt = int((input("How much would you like to withdraw? ")))
+    df.at[acctIndex, 'balance'] = df.at[acctIndex, 'balance'] - withdrawAmt
+    
+"""
     if withBal > 0:
             print("You withdrew {} dollars. Your remaining balance is: {} dollars".format(withdrawAmt, withBal))
     else:
             print("You're broke! Please control your spending habits!")
             loggedIn = 0
-
+"""
 # Formats and prints balance from data frame slice determined by selectedPin
 def check_balance():
     curBal = selectedAcct.at[int(acctIndex), 'balance']
@@ -50,7 +51,7 @@ while loggedIn == 1:
     print("2 - withdraw")
     print("3 - End Session")
     print("4 - Deposit")
-    print(acctIndex)
+    print(type(selectedAcct), type(acctIndex))
     # Get selection Input
     selection = input("Enter Selection: ")
 
