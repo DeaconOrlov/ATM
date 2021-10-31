@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-df = pd.read_csv('atm/accounts.csv')
+df = pd.read_csv('accounts.csv')
 
 # Request Pin from user
 selectedPin = int(input("Enter PIN: "))
@@ -64,7 +64,7 @@ while loggedIn == 1:
     # Selection 4
     elif selection == "4":
         print("logging out")
-        df.to_csv(('atm/accounts.csv'))
+        df.to_csv(('accounts.csv'))
 
         # Log out user (exit loop)
         loggedIn = 0
