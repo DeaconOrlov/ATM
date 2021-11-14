@@ -8,31 +8,28 @@ selectedPin = int(input("Enter PIN: "))
 #Extracts the row with the pin from the data frame
 acctIndex = df[df['pin']==selectedPin].index.values
 
-# Add to balance and return new balance
-def deposit_Amt():
-    depositAmt = int((input("How much would you like to deposit? ")))
-    df.loc[acctIndex, 'balance'] = df.loc[acctIndex, 'balance'] + depositAmt
-    
+# Formats and prints balance from data frame slice determined by selectedPin
+def check_balance():
+    curBalF = "${:,.2f}".format(df.at[int(acctIndex), 'balance'])
+    print(f"Your current balance is {curBalF}") 
 
 # Withdraw from balance, checks if balance is greater than zero, returns new balance
 def withdraw_Amt():
     withdrawAmt = int((input("How much would you like to withdraw? ")))
-    df.loc[acctIndex, 'balance'] = df.loc[acctIndex, 'balance'] - withdrawAmt
-           
-"""
-    if withBal > 0:
-            print("You withdrew {} dollars. Your remaining balance is: {} dollars".format(withdrawAmt, withBal))
+    df.loc[acctIndex, 'balance'] = df.loc[acctIndex, 'balance'] - withdrawAmt  
+    """
+    if df.loc[acctIndex, 'balance'] <= 0:
+        print('Insufficient Funds, please try a lesser amount')
+        df.loc[acctIndex, 'balance'] = df.loc[acctIndex, 'balance'] + withdrawAmt
     else:
-            print("You're broke! Please control your spending habits!")
-            loggedIn = 0
-"""
-# Formats and prints balance from data frame slice determined by selectedPin
-def check_balance():
-    curBalF = "${:,.2f}".format(df.at[int(acctIndex), 'balance'])
-    print(f"Your current balance is {curBalF}")
-    
-     
+        pass
+    """
 
+# Add to balance and return new balance
+def deposit_Amt():
+    depositAmt = int((input("How much would you like to deposit? ")))
+    df.loc[acctIndex, 'balance'] = df.loc[acctIndex, 'balance'] + depositAmt
+       
 # Set Logged in value to 1 now user is logged in
 # Checks pin input against saved pin
 if selectedPin in df.values:
@@ -57,14 +54,16 @@ while loggedIn == 1:
     # Selection 2
     elif selection == "2":
         withdraw_Amt()
+        check_balance()
             
     elif selection  == "3":
         deposit_Amt()
+        check_balance()
                 
     # Selection 4
     elif selection == "4":
         print("logging out")
-        df.to_csv(('accounts.csv'))
+        df.to_csv('accounts.csv', index=False)
 
         # Log out user (exit loop)
         loggedIn = 0
