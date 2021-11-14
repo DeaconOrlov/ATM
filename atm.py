@@ -17,14 +17,12 @@ def check_balance():
 def withdraw_Amt():
     withdrawAmt = int((input("How much would you like to withdraw? ")))
     df.loc[acctIndex, 'balance'] = df.loc[acctIndex, 'balance'] - withdrawAmt  
-    """
-    if df.loc[acctIndex, 'balance'] <= 0:
+    if (df['balance'] < 0).any():
         print('Insufficient Funds, please try a lesser amount')
         df.loc[acctIndex, 'balance'] = df.loc[acctIndex, 'balance'] + withdrawAmt
     else:
         pass
-    """
-
+    
 # Add to balance and return new balance
 def deposit_Amt():
     depositAmt = int((input("How much would you like to deposit? ")))
