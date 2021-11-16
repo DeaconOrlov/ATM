@@ -3,12 +3,6 @@ import pandas as pd
 import numpy as np
 df = pd.read_csv('accounts.csv')
 
-# Request Pin from user
-selectedPin = int(input("Enter PIN: "))
-
-#Extracts the row with the pin from the data frame
-acctIndex = df[df['pin']==selectedPin].index.values
-
 # Formats and prints balance from data frame slice determined by selectedPin
 def check_balance():
     curBalF = "${:,.2f}".format(df.at[int(acctIndex), 'balance'])
@@ -28,7 +22,13 @@ def withdraw_Amt():
 def deposit_Amt():
     depositAmt = int((input("How much would you like to deposit? ")))
     df.loc[acctIndex, 'balance'] = df.loc[acctIndex, 'balance'] + depositAmt
-       
+
+# Request Pin from user
+selectedPin = int(input("Enter PIN: "))
+
+#Extracts the row with the pin from the data frame
+acctIndex = df[df['pin']==selectedPin].index.values
+
 # Set Logged in value to 1 now user is logged in
 # Checks pin input against saved pin
 if selectedPin in df.values:
