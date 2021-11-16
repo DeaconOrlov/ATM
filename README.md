@@ -29,3 +29,7 @@ From there you can select any menu item to interact with the account information
 1. The program reads from a CSV and stores the contents in a Pandas dataframe for interaction and writes back to the CSV when you exit the program.
 2. The menu operates as a master while loop based on the PIN entered in the first input dialogue
 3. Each menu item is a function (3) that interracts with the datafrme in some way
+<<<<<<< HEAD
+=======
+
+>>>>>>> 257f25cad695d269002620cb9a96d90e6d2a8b0a
