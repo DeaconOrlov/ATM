@@ -1,8 +1,15 @@
 import pandas as pd
+from datetime import datetime
 
 df = pd.read_csv('accounts.csv')
 
 loggedIn = 0
+
+#Logs changes to the balance in a textfile
+def change_logger():
+    f = open('log.txt', "a")
+    f.write("{0} -- {1}\n".format(datetime.now().strftime("%Y-%m-%d %H:%M"), 'Balance Changed'))
+    f.close()
 
 # Formats and prints balance from data frame slice determined by selectedPin
 def check_balance():
@@ -13,18 +20,19 @@ def check_balance():
 # and restore balance, else print new balance
 def withdraw_Amt():
     withdrawAmt = int((input("How much would you like to withdraw? ")))
-    df.loc[acctIndex, 'balance'] = df.loc[acctIndex, 'balance'] - withdrawAmt  
+    df.loc[acctIndex, 'balance'] = df.loc[acctIndex, 'balance'] - withdrawAmt
     if (df['balance'] < 0).any():
         print('Insufficient Funds, please try a lesser amount')
         df.loc[acctIndex, 'balance'] = df.loc[acctIndex, 'balance'] + withdrawAmt
     else:
-        pass
+        return withdrawAmt
     
 # Add to balance and return new balance
 def deposit_Amt():
     depositAmt = int((input("How much would you like to deposit? ")))
     df.loc[acctIndex, 'balance'] = df.loc[acctIndex, 'balance'] + depositAmt
-
+    return depositAmt
+    
 # Request Pin from user
 selectedPin = int(input("Enter PIN: "))
 
@@ -56,10 +64,12 @@ while loggedIn == 1:
     elif selection == "2":
         withdraw_Amt()
         check_balance()
+        change_logger()
             
     elif selection  == "3":
         deposit_Amt()
         check_balance()
+        change_logger()
                 
     # Selection 4
     elif selection == "4":
