@@ -1,6 +1,6 @@
 # ATM
 
-This is a simple ATM style program that reads the contents of a CSV into a Pandas Dataframe and prompts the user to enter a PIN.  The program then presents the user with a menu of 4 options that act on the account information associated with the PIN selected.  A user can check the balance, withdraw from the account provided that the amount does not go negative thus yielding an insufficient funds warning and returning the amount attempted to withdraw to the balance, desposit to the balance, or exit the menu which closes the while loop and writes the contents of the Dataframe back to the CSV.
+This is a simple ATM style program that reads the contents of a CSV into a Pandas Dataframe and prompts the user to enter a PIN.  The program then presents the user with a menu of 4 options that act on the account information associated with the PIN selected.  A user can check the balance, withdraw from the account provided that the amount does not go negative thus yielding an insufficient funds warning and returning the amount attempted to withdraw to the balance, desposit to the balance, or exit the menu which closes the while loop and writes the contents of the Dataframe back to the CSV.  Any time the balance changes either on a withdrawl or deposit a logger outputs the date and time of teh change to a text file for later reference.  
 
 # Implementation
 
@@ -29,7 +29,4 @@ From there you can select any menu item to interact with the account information
 1. The program reads from a CSV and stores the contents in a Pandas dataframe for interaction and writes back to the CSV when you exit the program.
 2. The menu operates as a master while loop based on the PIN entered in the first input dialogue
 3. Each menu item is a function (3) that interracts with the datafrme in some way
-<<<<<<< HEAD
-=======
-
->>>>>>> 257f25cad695d269002620cb9a96d90e6d2a8b0a
+4. A simple logging functionchange_logger notes the datetime stamp and that a change has occured to the balance on a withdrawl or deposit.
